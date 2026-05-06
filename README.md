@@ -1,69 +1,40 @@
 # ion-net-capture-mesh
 
-`ion-net-capture-mesh` treats networking as a local verification problem. The TypeScript implementation is intentionally narrow, but the fixtures and notes make the behavior explicit.
+`ion-net-capture-mesh` keeps a focused TypeScript implementation around networking. The project goal is to design a TypeScript verification harness for capture systems, covering resource planning, capacity fixtures, and failure-oriented tests.
 
-## Ion Net Capture Mesh Checkpoints
+## Use Case
 
-Treat the compact fixture as the contract and the extended examples as a scratchpad. The code should stay boring enough that a change in behavior is obvious from the test output.
+I want this repository to be useful as a quick reading exercise: fixtures first, implementation second, verifier last.
 
-## Useful Pieces
+## Ion Net Capture Mesh Review Notes
 
-- Includes extended examples for retry behavior, including `recovery` and `degraded`.
-- Documents policy decisions tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-- Stores project constants and verification metadata in `metadata/project.json`.
-- Adds a repository audit script that checks structure before running the language verifier.
+The first comparison I would make is `packet span` against `retry pressure` because it shows where the rule is most opinionated.
 
-## What This Is For
+## Highlights
 
-The goal is to capture the core behavior in code and make the surrounding assumptions obvious. A reader should be able to run the verifier, open the fixtures, and understand why each decision was made.
+- `fixtures/domain_review.csv` adds cases for packet span and retry pressure.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/ion-net-capture-walkthrough.md` walks through the case spread.
+- The TypeScript code includes a review path for `packet span` and `retry pressure`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Project Layout
+## Code Layout
 
-- `src`: primary implementation
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
-- `package.json`: Node package scripts
+The repository has two validation layers: the original compact policy fixture and the domain review fixture. They are separate so one can change without hiding failures in the other.
 
-## Architecture Notes
+The TypeScript addition stays small enough to inspect in one sitting.
 
-The interesting part is the boundary between accepted and reviewed scenarios. Extended examples sit near that boundary so future edits can show whether the model became more permissive or more cautious. The TypeScript project keeps types close to the model and compiles before running its checks.
-
-## Local Workflow
+## Run The Check
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Regression Path
 
-## Case Study
+That command is also the regression path. It verifies the domain cases and catches mismatches between the CSV, metadata, and code.
 
-`examples/extended_cases.csv` adds six named cases. I kept the names plain so failures are easy to read in a terminal: baseline, pressure, surge, degraded, recovery, and boundary.
+## Future Work
 
-## Quality Gate
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
-
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Scope
-
-The repository favors determinism over breadth. It does not pull live data, keep secrets, or depend on network access for verification.
-
-## Expansion Ideas
-
-- Add a short report command that prints the score breakdown for a single scenario.
-- Add malformed input fixtures so the failure path is as visible as the happy path.
-- Split the scoring constants into a typed configuration object and validate it before use.
-- Add one more networking fixture that focuses on a malformed or borderline input.
-
-## Tooling
-
-The only required setup is the local TypeScript toolchain. After cloning, stay in the repo root so fixture paths resolve correctly.
+No external service is required. A deeper version would add more negative cases and a clearer boundary around invalid input.

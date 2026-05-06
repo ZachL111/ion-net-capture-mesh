@@ -1,0 +1,29 @@
+{
+  "repo": "ion-net-capture-mesh",
+  "language": "TypeScript",
+  "category": "Networking",
+  "case_count": 5,
+  "score_formula": "signal * 2 + slack + confidence - drag * 3",
+  "lane_thresholds": {
+    "ship": 140,
+    "watch": 105
+  },
+  "read_order": [
+    "README.md",
+    "fixtures/domain_review.csv",
+    "metadata/domain-review.json",
+    "examples/ion-net-capture-walkthrough.md"
+  ],
+  "first_question": "Does packet span still dominate the review result?",
+  "second_question": "Is route drift being penalized hard enough before socket risk is trusted?",
+  "highest_case": {
+    "name": "baseline",
+    "focus": "packet span",
+    "score": 207
+  },
+  "lowest_case": {
+    "name": "stress",
+    "focus": "retry pressure",
+    "score": 140
+  }
+}

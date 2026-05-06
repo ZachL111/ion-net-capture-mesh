@@ -60,3 +60,7 @@ foreach ($pathPattern in $knownPaths) {
 
 tsc --pretty false
 node dist/tests/policy.test.js
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-ion-net-capture-detail.ps1
+
+node dist/tests/domainReview.test.js

@@ -1,0 +1,73 @@
+{
+  "repo": "ion-net-capture-mesh",
+  "language": "TypeScript",
+  "category": "Networking",
+  "goal": "Design a TypeScript verification harness for capture systems, covering resource planning, capacity fixtures, and failure-oriented tests.",
+  "review_model": {
+    "terms": [
+      "packet span",
+      "retry pressure",
+      "route drift",
+      "socket risk"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "packet span",
+      "signal": 73,
+      "slack": 48,
+      "drag": 23,
+      "confidence": 82,
+      "score": 207,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "retry pressure",
+      "signal": 57,
+      "slack": 43,
+      "drag": 32,
+      "confidence": 79,
+      "score": 140,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "route drift",
+      "signal": 73,
+      "slack": 28,
+      "drag": 29,
+      "confidence": 91,
+      "score": 178,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "socket risk",
+      "signal": 62,
+      "slack": 38,
+      "drag": 11,
+      "confidence": 69,
+      "score": 198,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "packet span",
+      "signal": 69,
+      "slack": 27,
+      "drag": 14,
+      "confidence": 51,
+      "score": 174,
+      "lane": "ship"
+    }
+  ]
+}
