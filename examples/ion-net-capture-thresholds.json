@@ -1,0 +1,17 @@
+{
+  "repo": "ion-net-capture-mesh",
+  "thresholds": {
+    "signal": 2,
+    "slack": 2,
+    "confidence": 2,
+    "drag": 3,
+    "ship": 203,
+    "watch": 129
+  },
+  "terms": [
+    "packet span",
+    "retry pressure",
+    "route drift",
+    "socket risk"
+  ]
+}
